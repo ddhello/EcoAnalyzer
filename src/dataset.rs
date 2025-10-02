@@ -3,9 +3,9 @@ use jieba_rs::Jieba;
 use serde::Deserialize;
 use std::fs;
 
-use crate::tensor::{Vocab, MAX_SEQ_LEN, PAD_ID};
+use crate::tensor::{MAX_SEQ_LEN, PAD_ID, Vocab};
 
-use burn::data::dataset::{Dataset}; 
+use burn::data::dataset::Dataset;
 
 pub struct MyDataset {
     data: Vec<ProcessedItem>,
@@ -13,7 +13,7 @@ pub struct MyDataset {
 
 impl Dataset<ProcessedItem> for MyDataset {
     fn get(&self, index: usize) -> Option<ProcessedItem> {
-        self.data.get(index).cloned() 
+        self.data.get(index).cloned()
     }
 
     fn len(&self) -> usize {
@@ -54,13 +54,23 @@ pub struct TokenizedDataset {
     pub socres: Vec<u32>,
 }
 
-#[derive(Clone,Debug)]
-pub struct ProcessedItem{
+#[derive(Clone, Debug)]
+pub struct ProcessedItem {
     pub token_ids: Vec<u32>,
     pub score: u32,
 }
 
 impl TextClassificationBatcher {
+    pub fn tokenize_single(text: &str) -> Vec<String> {
+        let jieba = Jieba::new();
+        let tokens: Vec<String> = jieba
+            .cut(text, false)
+            .into_iter()
+            .map(|s| s.to_owned())
+            .collect();
+        tokens
+    }
+
     pub fn read_from_csv(path: String) -> Result<Self> {
         let content = fs::read_to_string(path).expect("Cannot Read From The File");
         let mut reader = csv::Reader::from_reader(content.as_bytes());
@@ -134,12 +144,12 @@ impl TokenizedDataset {
             }
 
             //填充
-            if id_sequence.len() < MAX_SEQ_LEN{
+            if id_sequence.len() < MAX_SEQ_LEN {
                 //let padding_needed = MAX_SEQ_LEN - id_sequence.len();
                 id_sequence.resize(MAX_SEQ_LEN, PAD_ID);
             }
 
-            processed_data.push((id_sequence,*score));
+            processed_data.push((id_sequence, *score));
         }
 
         processed_data

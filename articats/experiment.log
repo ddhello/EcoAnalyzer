@@ -1,0 +1,687 @@
+2025-10-02T16:54:02.992831Z  INFO cubecl_wgpu::runtime: Using adapter AdapterInfo { name: "NVIDIA GeForce RTX 3070 Laptop GPU", vendor: 4318, device: 9437, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "580.88", backend: Vulkan }
+2025-10-02T16:54:03.507605Z  INFO cubecl_wgpu::runtime: Created wgpu compute server on device Device { inner: Core(CoreDevice { context: ContextWgpuCore { type: "Native" }, id: Id(0,1), error_sink: Mutex { data: ErrorSink }, features: Features { features_wgpu: FeaturesWGPU(SHADER_FLOAT32_ATOMIC | TEXTURE_FORMAT_16BIT_NORM | TEXTURE_ADAPTER_SPECIFIC_FORMAT_FEATURES | PIPELINE_STATISTICS_QUERY | TIMESTAMP_QUERY_INSIDE_ENCODERS | TIMESTAMP_QUERY_INSIDE_PASSES | TEXTURE_BINDING_ARRAY | BUFFER_BINDING_ARRAY | STORAGE_RESOURCE_BINDING_ARRAY | SAMPLED_TEXTURE_AND_STORAGE_BUFFER_ARRAY_NON_UNIFORM_INDEXING | STORAGE_TEXTURE_ARRAY_NON_UNIFORM_INDEXING | PARTIALLY_BOUND_BINDING_ARRAY | MULTI_DRAW_INDIRECT | MULTI_DRAW_INDIRECT_COUNT | PUSH_CONSTANTS | ADDRESS_MODE_CLAMP_TO_ZERO | ADDRESS_MODE_CLAMP_TO_BORDER | POLYGON_MODE_LINE | POLYGON_MODE_POINT | CONSERVATIVE_RASTERIZATION | VERTEX_WRITABLE_STORAGE | CLEAR_TEXTURE | SPIRV_SHADER_PASSTHROUGH | MULTIVIEW | TEXTURE_ATOMIC | TEXTURE_FORMAT_NV12 | EXPERIMENTAL_RAY_TRACING_ACCELERATION_STRUCTURE | EXPERIMENTAL_RAY_QUERY | SHADER_F64 | SHADER_I16 | SHADER_PRIMITIVE_INDEX | SHADER_INT64 | SUBGROUP | SUBGROUP_VERTEX | SUBGROUP_BARRIER | PIPELINE_CACHE | SHADER_INT64_ATOMIC_MIN_MAX | SHADER_INT64_ATOMIC_ALL_OPS | VULKAN_EXTERNAL_MEMORY_WIN32 | TEXTURE_INT64_ATOMIC | EXPERIMENTAL_MESH_SHADER | EXPERIMENTAL_RAY_HIT_VERTEX_RETURN | EXPERIMENTAL_MESH_SHADER_MULTIVIEW), features_webgpu: FeaturesWebGPU(DEPTH_CLIP_CONTROL | DEPTH32FLOAT_STENCIL8 | TEXTURE_COMPRESSION_BC | TEXTURE_COMPRESSION_BC_SLICED_3D | TIMESTAMP_QUERY | INDIRECT_FIRST_INSTANCE | RG11B10UFLOAT_RENDERABLE | BGRA8UNORM_STORAGE | FLOAT32_FILTERABLE | DUAL_SOURCE_BLENDING) } }) } => AdapterInfo { name: "NVIDIA GeForce RTX 3070 Laptop GPU", vendor: 4318, device: 9437, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "580.88", backend: Vulkan }
+2025-10-02T16:54:02.789877Z  INFO burn_train::learner::train_val: Fitting the model:
+ TextRegressionModel {
+  embedding: Embedding {n_embedding: 14337, d_model: 128, params: 1835136}
+  transformer: TransformerEncoder {d_model: 128, d_ff: 512, n_heads: 4, n_layers: 4, dropout: 0.1, norm_first: false, quiet_softmax: false, params: 793088}
+  output_layer: Linear {d_input: 128, d_output: 1, bias: true, params: 129}
+  params: 2628353
+}
+2025-10-02T16:54:03.573906Z  INFO burn_train::learner::epoch: Executing training step for epoch 1
+2025-10-02T16:54:03.574341Z  INFO burn_train::learner::epoch: Iteration 1
+2025-10-02T16:54:03.592476Z  INFO cubecl_runtime::tune::tune_cache: Load autotune cache ...
+2025-10-02T16:54:03.593136Z  INFO cubecl_runtime::tune::tune_cache: Loaded 0 autotune cached entries
+2025-10-02T16:54:03.593181Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 128, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: Contiguous }, Analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: General }
+2025-10-02T16:54:03.841485Z  INFO cubecl_runtime::tune::tune_cache: Load autotune cache ...
+2025-10-02T16:54:03.842009Z  INFO cubecl_runtime::tune::tune_cache: Loaded 0 autotune cached entries
+2025-10-02T16:54:03.842030Z  INFO cubecl_runtime::tune::tuner: Tuning FusedMatmulAutotuneKey - MatmulKey: MatmulAutotuneKey { definition: MatmulProblemDefinition { m: 128, n: 128, k: 32, lhs_pow2_factor: 0, rhs_pow2_factor: 0, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: HighlyPermuted, matrix_layout_rhs: HighlyPermuted }, analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: General } }, NumOutBuffers: 1, NumOps: 2
+2025-10-02T16:54:03.842470Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 128, k: 32, lhs_pow2_factor: 0, rhs_pow2_factor: 0, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: HighlyPermuted, matrix_layout_rhs: HighlyPermuted }, Analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: General }
+2025-10-02T16:54:03.956435Z  INFO cubecl_runtime::tune::tune_cache: Load autotune cache ...
+2025-10-02T16:54:03.956938Z  INFO cubecl_runtime::tune::tune_cache: Loaded 0 autotune cached entries
+2025-10-02T16:54:03.956968Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 4096 }, FuseNumReads: 2, FuseNumWrites: 2, FuseNumOps: 2
+2025-10-02T16:54:03.967438Z  INFO cubecl_runtime::tune::tune_cache: Load autotune cache ...
+2025-10-02T16:54:03.967965Z  INFO cubecl_runtime::tune::tune_cache: Loaded 0 autotune cached entries
+2025-10-02T16:54:03.967993Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 4, AxisIsContiguous: true, ReduceAxisShape: 128, ReduceCount: 4096
+2025-10-02T16:54:04.184849Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 4096 }, FuseNumReads: 2, FuseNumWrites: 4, FuseNumOps: 2
+2025-10-02T16:54:04.382147Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 32, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 0, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: HighlyPermuted }, Analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: General }
+2025-10-02T16:54:04.559906Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 4, FuseNumWrites: 2, FuseNumOps: 4
+2025-10-02T16:54:04.570599Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 4, AxisIsContiguous: true, ReduceAxisShape: 128, ReduceCount: 1024
+2025-10-02T16:54:04.765330Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 2, FuseNumWrites: 2, FuseNumOps: 2
+2025-10-02T16:54:04.997690Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 512, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: Contiguous }, Analysis: MatmulAutotuneAnalysis { scale_global: Medium, kind: General }
+2025-10-02T16:54:05.695654Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 128, k: 512, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: Contiguous }, Analysis: MatmulAutotuneAnalysis { scale_global: Medium, kind: General }
+2025-10-02T16:54:06.013870Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 4, FuseNumWrites: 1, FuseNumOps: 2
+2025-10-02T16:54:06.014148Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 4, AxisIsContiguous: false, ReduceAxisShape: 128, ReduceCount: 1024
+2025-10-02T16:54:06.301803Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 1, n: 1, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 0, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: Contiguous }, Analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: InnerProduct }
+2025-10-02T16:54:06.383647Z  INFO cubecl_runtime::tune::tune_cache: Load autotune cache ...
+2025-10-02T16:54:06.384348Z  INFO cubecl_runtime::tune::tune_cache: Loaded 0 autotune cached entries
+2025-10-02T16:54:06.384379Z  INFO cubecl_runtime::tune::tuner: Tuning SumAutotuneKey { dtype: F32, length: 8 }
+2025-10-02T16:54:06.384514Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 1, AxisIsContiguous: true, ReduceAxisShape: 16, ReduceCount: 16
+2025-10-02T16:54:06.471648Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 4, AxisIsContiguous: true, ReduceAxisShape: 16, ReduceCount: 1
+2025-10-02T16:54:06.606539Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 1 }, FuseNumReads: 1, FuseNumWrites: 2, FuseNumOps: 0
+2025-10-02T16:54:06.729494Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 1, n: 128, k: 1, lhs_pow2_factor: 0, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: Contiguous }, Analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: ScalarVec }
+2025-10-02T16:54:06.805043Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 1, k: 1, lhs_pow2_factor: 3, rhs_pow2_factor: 0, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: MildlyPermuted { transposed: true, batch_swap: false }, matrix_layout_rhs: Contiguous }, Analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: VecScalar }
+2025-10-02T16:54:06.863353Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 4, AxisIsContiguous: false, ReduceAxisShape: 16, ReduceCount: 256
+2025-10-02T16:54:06.969932Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 1, AxisIsContiguous: false, ReduceAxisShape: 16, ReduceCount: 1024
+2025-10-02T16:54:06.980179Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 2, FuseNumWrites: 2, FuseNumOps: 1
+2025-10-02T16:54:06.996130Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 4, AxisIsContiguous: false, ReduceAxisShape: 16, ReduceCount: 16384
+2025-10-02T16:54:07.136732Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 4, AxisIsContiguous: false, ReduceAxisShape: 128, ReduceCount: 256
+2025-10-02T16:54:07.149920Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 4, FuseNumWrites: 2, FuseNumOps: 2
+2025-10-02T16:54:07.317755Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 4, FuseNumWrites: 1, FuseNumOps: 4
+2025-10-02T16:54:07.469042Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 1, axis_is_contiguous: true, reduce_axis_shape: 16, reduce_count: 1024 }, FuseNumReads: 2, FuseNumWrites: 1, FuseNumOps: 4
+2025-10-02T16:54:07.478978Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 1, AxisIsContiguous: true, ReduceAxisShape: 16, ReduceCount: 1024
+2025-10-02T16:54:07.589218Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 4, FuseNumWrites: 2, FuseNumOps: 8
+2025-10-02T16:54:07.783479Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 1, axis_is_contiguous: true, reduce_axis_shape: 16, reduce_count: 1024 }, FuseNumReads: 2, FuseNumWrites: 1, FuseNumOps: 1
+2025-10-02T16:54:07.876150Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 4, FuseNumWrites: 4, FuseNumOps: 4
+2025-10-02T16:54:08.037510Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 512, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: MildlyPermuted { transposed: true, batch_swap: false } }, Analysis: MatmulAutotuneAnalysis { scale_global: Medium, kind: General }
+2025-10-02T16:54:08.898606Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 512, n: 128, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: MildlyPermuted { transposed: true, batch_swap: false }, matrix_layout_rhs: Contiguous }, Analysis: MatmulAutotuneAnalysis { scale_global: Medium, kind: General }
+2025-10-02T16:54:11.078173Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 4, FuseNumWrites: 2, FuseNumOps: 32
+2025-10-02T16:54:11.319608Z  INFO cubecl_runtime::tune::tuner: Tuning FusedMatmulAutotuneKey - MatmulKey: MatmulAutotuneKey { definition: MatmulProblemDefinition { m: 128, n: 128, k: 512, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: MildlyPermuted { transposed: true, batch_swap: false } }, analysis: MatmulAutotuneAnalysis { scale_global: Medium, kind: General } }, NumOutBuffers: 2, NumOps: 4
+2025-10-02T16:54:11.319889Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 128, k: 512, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: MildlyPermuted { transposed: true, batch_swap: false } }, Analysis: MatmulAutotuneAnalysis { scale_global: Medium, kind: General }
+2025-10-02T16:54:11.699833Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 512, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: MildlyPermuted { transposed: true, batch_swap: false }, matrix_layout_rhs: Contiguous }, Analysis: MatmulAutotuneAnalysis { scale_global: Medium, kind: General }
+2025-10-02T16:54:12.568381Z  INFO cubecl_runtime::tune::tuner: Tuning FusedMatmulAutotuneKey - MatmulKey: MatmulAutotuneKey { definition: MatmulProblemDefinition { m: 128, n: 128, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: MildlyPermuted { transposed: true, batch_swap: false } }, analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: General } }, NumOutBuffers: 1, NumOps: 2
+2025-10-02T16:54:12.568690Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 128, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: MildlyPermuted { transposed: true, batch_swap: false } }, Analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: General }
+2025-10-02T16:54:12.832488Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 128, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: MildlyPermuted { transposed: true, batch_swap: false }, matrix_layout_rhs: Contiguous }, Analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: General }
+2025-10-02T16:54:12.895147Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 128, n: 32, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 0, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: MildlyPermuted { transposed: true, batch_swap: false }, matrix_layout_rhs: HighlyPermuted }, Analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: General }
+2025-10-02T16:54:13.149656Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 4096 }, FuseNumReads: 4, FuseNumWrites: 1, FuseNumOps: 4
+2025-10-02T16:54:13.384487Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 1, AxisIsContiguous: true, ReduceAxisShape: 16, ReduceCount: 4096
+2025-10-02T16:54:13.453623Z  INFO cubecl_runtime::tune::tuner: Tuning MatmulAutotuneKey - Definition: MatmulProblemDefinition { m: 32, n: 128, k: 128, lhs_pow2_factor: 0, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: HighlyPermuted, matrix_layout_rhs: Contiguous }, Analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: General }
+2025-10-02T16:54:13.647036Z  INFO cubecl_runtime::tune::tuner: Tuning FusedMatmulAutotuneKey - MatmulKey: MatmulAutotuneKey { definition: MatmulProblemDefinition { m: 128, n: 128, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: MildlyPermuted { transposed: true, batch_swap: false } }, analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: General } }, NumOutBuffers: 2, NumOps: 4
+2025-10-02T16:54:15.404748Z  INFO burn_train::learner::epoch: Iteration 2
+2025-10-02T16:54:16.072523Z  INFO burn_train::learner::epoch: Iteration 3
+2025-10-02T16:54:16.111101Z  INFO burn_train::learner::epoch: Iteration 4
+2025-10-02T16:54:16.135231Z  INFO burn_train::learner::epoch: Iteration 5
+2025-10-02T16:54:16.235068Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 4096 }, FuseNumReads: 1, FuseNumWrites: 2, FuseNumOps: 1
+2025-10-02T16:54:16.430836Z  INFO burn_train::learner::epoch: Iteration 6
+2025-10-02T16:54:16.450322Z  INFO burn_train::learner::epoch: Iteration 7
+2025-10-02T16:54:16.469697Z  INFO burn_train::learner::epoch: Iteration 8
+2025-10-02T16:54:16.490569Z  INFO burn_train::learner::epoch: Iteration 9
+2025-10-02T16:54:16.509545Z  INFO burn_train::learner::epoch: Iteration 10
+2025-10-02T16:54:16.528229Z  INFO burn_train::learner::epoch: Iteration 11
+2025-10-02T16:54:16.547272Z  INFO burn_train::learner::epoch: Iteration 12
+2025-10-02T16:54:16.565908Z  INFO burn_train::learner::epoch: Iteration 13
+2025-10-02T16:54:16.584720Z  INFO burn_train::learner::epoch: Iteration 14
+2025-10-02T16:54:16.605664Z  INFO burn_train::learner::epoch: Iteration 15
+2025-10-02T16:54:16.624430Z  INFO burn_train::learner::epoch: Iteration 16
+2025-10-02T16:54:16.643147Z  INFO burn_train::learner::epoch: Iteration 17
+2025-10-02T16:54:16.662745Z  INFO burn_train::learner::epoch: Iteration 18
+2025-10-02T16:54:16.682894Z  INFO burn_train::learner::epoch: Iteration 19
+2025-10-02T16:54:16.704390Z  INFO burn_train::learner::epoch: Iteration 20
+2025-10-02T16:54:16.727649Z  INFO burn_train::learner::epoch: Iteration 21
+2025-10-02T16:54:16.748260Z  INFO burn_train::learner::epoch: Iteration 22
+2025-10-02T16:54:16.768849Z  INFO burn_train::learner::epoch: Iteration 23
+2025-10-02T16:54:16.793464Z  INFO burn_train::learner::epoch: Iteration 24
+2025-10-02T16:54:16.824242Z  INFO burn_train::learner::epoch: Iteration 25
+2025-10-02T16:54:16.848732Z  INFO burn_train::learner::epoch: Iteration 26
+2025-10-02T16:54:16.870947Z  INFO burn_train::learner::epoch: Iteration 27
+2025-10-02T16:54:16.890861Z  INFO burn_train::learner::epoch: Iteration 28
+2025-10-02T16:54:16.911836Z  INFO burn_train::learner::epoch: Iteration 29
+2025-10-02T16:54:16.933221Z  INFO burn_train::learner::epoch: Iteration 30
+2025-10-02T16:54:16.953762Z  INFO burn_train::learner::epoch: Iteration 31
+2025-10-02T16:54:16.973840Z  INFO burn_train::learner::epoch: Iteration 32
+2025-10-02T16:54:16.995405Z  INFO burn_train::learner::epoch: Iteration 33
+2025-10-02T16:54:17.015756Z  INFO burn_train::learner::epoch: Iteration 34
+2025-10-02T16:54:17.036287Z  INFO burn_train::learner::epoch: Iteration 35
+2025-10-02T16:54:17.056824Z  INFO burn_train::learner::epoch: Iteration 36
+2025-10-02T16:54:17.079336Z  INFO burn_train::learner::epoch: Iteration 37
+2025-10-02T16:54:17.099748Z  INFO burn_train::learner::epoch: Iteration 38
+2025-10-02T16:54:17.119531Z  INFO burn_train::learner::epoch: Iteration 39
+2025-10-02T16:54:17.140308Z  INFO burn_train::learner::epoch: Iteration 40
+2025-10-02T16:54:17.163177Z  INFO burn_train::learner::epoch: Iteration 41
+2025-10-02T16:54:17.183650Z  INFO burn_train::learner::epoch: Iteration 42
+2025-10-02T16:54:17.203798Z  INFO burn_train::learner::epoch: Iteration 43
+2025-10-02T16:54:17.224688Z  INFO burn_train::learner::epoch: Iteration 44
+2025-10-02T16:54:17.246541Z  INFO burn_train::learner::epoch: Iteration 45
+2025-10-02T16:54:17.264898Z  INFO burn_train::learner::epoch: Iteration 46
+2025-10-02T16:54:17.296441Z  INFO cubecl_runtime::tune::tuner: Tuning SumAutotuneKey { dtype: F32, length: 3 }
+2025-10-02T16:54:17.296506Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 1, AxisIsContiguous: true, ReduceAxisShape: 16, ReduceCount: 4
+2025-10-02T16:54:17.303183Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 1, AxisIsContiguous: true, ReduceAxisShape: 16, ReduceCount: 1
+2025-10-02T16:54:17.341201Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 1, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 1 }, FuseNumReads: 1, FuseNumWrites: 2, FuseNumOps: 0
+2025-10-02T16:54:17.351471Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 1, AxisIsContiguous: false, ReduceAxisShape: 16, ReduceCount: 256
+2025-10-02T16:54:17.358464Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 1, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 2, FuseNumWrites: 2, FuseNumOps: 1
+2025-10-02T16:54:17.358821Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 1, AxisIsContiguous: false, ReduceAxisShape: 16, ReduceCount: 16384
+2025-10-02T16:54:17.380684Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 1, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 4, FuseNumWrites: 2, FuseNumOps: 2
+2025-10-02T16:54:17.443559Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 1, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 4, FuseNumWrites: 4, FuseNumOps: 4
+2025-10-02T16:54:17.455254Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 1, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 4, FuseNumWrites: 2, FuseNumOps: 32
+2025-10-02T16:54:17.480909Z  INFO burn_train::learner::epoch: Iteration 47
+2025-10-02T16:54:17.499861Z  INFO burn_train::learner::epoch: Iteration 48
+2025-10-02T16:54:17.518920Z  INFO burn_train::learner::epoch: Iteration 49
+2025-10-02T16:54:17.539566Z  INFO burn_train::learner::epoch: Iteration 50
+2025-10-02T16:54:17.559118Z  INFO burn_train::learner::epoch: Iteration 51
+2025-10-02T16:54:17.578177Z  INFO burn_train::learner::epoch: Iteration 52
+2025-10-02T16:54:17.616996Z  INFO cubecl_runtime::tune::tuner: Tuning SumAutotuneKey { dtype: F32, length: 4 }
+2025-10-02T16:54:17.642963Z  INFO burn_train::learner::epoch: Executing validation step for epoch 1
+2025-10-02T16:54:17.690590Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 2, FuseNumWrites: 2, FuseNumOps: 1
+2025-10-02T16:54:17.801702Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 2, FuseNumWrites: 1, FuseNumOps: 2
+2025-10-02T16:54:17.994854Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 4, FuseNumWrites: 2, FuseNumOps: 2
+2025-10-02T16:54:18.206182Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 256 }, FuseNumReads: 2, FuseNumWrites: 2, FuseNumOps: 1
+2025-10-02T16:54:18.206407Z  INFO cubecl_runtime::tune::tuner: Tuning ReduceAutotuneKey - ElemInput: Float(F32), ElemOutput: Float(F32), ElemAcc: Float(F32), PotentialLineSize: 4, AxisIsContiguous: true, ReduceAxisShape: 128, ReduceCount: 256
+2025-10-02T16:54:18.268276Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 256 }, FuseNumReads: 2, FuseNumWrites: 1, FuseNumOps: 2
+2025-10-02T16:54:18.333903Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 256 }, FuseNumReads: 4, FuseNumWrites: 2, FuseNumOps: 2
+2025-10-02T16:54:18.419400Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 128, reduce_count: 256 }, FuseNumReads: 4, FuseNumWrites: 1, FuseNumOps: 2
+2025-10-02T16:54:18.484512Z  INFO cubecl_runtime::tune::tuner: Tuning FusedMatmulAutotuneKey - MatmulKey: MatmulAutotuneKey { definition: MatmulProblemDefinition { m: 1, n: 1, k: 128, lhs_pow2_factor: 3, rhs_pow2_factor: 0, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: Contiguous }, analysis: MatmulAutotuneAnalysis { scale_global: Small, kind: InnerProduct } }, NumOutBuffers: 1, NumOps: 4
+2025-10-02T16:54:18.573152Z  INFO cubecl_runtime::tune::tuner: Tuning SumAutotuneKey { dtype: F32, length: 1 }
+2025-10-02T16:54:18.617933Z  INFO burn_train::checkpoint::file: Saving checkpoint 1 to articats\checkpoint\model-1
+2025-10-02T16:54:18.617955Z  INFO burn_train::learner::epoch: Executing training step for epoch 2
+2025-10-02T16:54:18.617968Z  INFO burn_train::checkpoint::file: Saving checkpoint 1 to articats\checkpoint\optim-1
+2025-10-02T16:54:18.618000Z  INFO burn_train::checkpoint::file: Saving checkpoint 1 to articats\checkpoint\scheduler-1
+2025-10-02T16:54:18.620522Z  INFO burn_train::learner::epoch: Iteration 1
+2025-10-02T16:54:19.275956Z  INFO burn_train::learner::epoch: Iteration 2
+2025-10-02T16:54:19.403485Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 4096 }, FuseNumReads: 2, FuseNumWrites: 1, FuseNumOps: 1
+2025-10-02T16:54:19.958735Z  INFO burn_train::learner::epoch: Iteration 3
+2025-10-02T16:54:19.980680Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 2, FuseNumWrites: 1, FuseNumOps: 1
+2025-10-02T16:54:20.628974Z  INFO burn_train::learner::epoch: Iteration 4
+2025-10-02T16:54:20.679872Z  INFO burn_train::learner::epoch: Iteration 5
+2025-10-02T16:54:20.702786Z  INFO burn_train::learner::epoch: Iteration 6
+2025-10-02T16:54:20.733081Z  INFO burn_train::learner::epoch: Iteration 7
+2025-10-02T16:54:20.782022Z  INFO burn_train::learner::epoch: Iteration 8
+2025-10-02T16:54:20.838187Z  INFO burn_train::learner::epoch: Iteration 9
+2025-10-02T16:54:20.893588Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 2, FuseNumWrites: 1, FuseNumOps: 1
+2025-10-02T16:54:21.009733Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: true, reduce_axis_shape: 128, reduce_count: 1024 }, FuseNumReads: 2, FuseNumWrites: 2, FuseNumOps: 4
+2025-10-02T16:54:21.149169Z  INFO burn_train::learner::epoch: Iteration 10
+2025-10-02T16:54:21.232453Z  INFO burn_train::learner::epoch: Iteration 11
+2025-10-02T16:54:21.254676Z  INFO burn_train::learner::epoch: Iteration 12
+2025-10-02T16:54:21.274304Z  INFO burn_train::learner::epoch: Iteration 13
+2025-10-02T16:54:21.294806Z  INFO burn_train::learner::epoch: Iteration 14
+2025-10-02T16:54:21.315531Z  INFO burn_train::learner::epoch: Iteration 15
+2025-10-02T16:54:21.337373Z  INFO burn_train::learner::epoch: Iteration 16
+2025-10-02T16:54:21.356136Z  INFO burn_train::learner::epoch: Iteration 17
+2025-10-02T16:54:21.375001Z  INFO burn_train::learner::epoch: Iteration 18
+2025-10-02T16:54:21.395044Z  INFO burn_train::learner::epoch: Iteration 19
+2025-10-02T16:54:21.417288Z  INFO burn_train::learner::epoch: Iteration 20
+2025-10-02T16:54:21.437945Z  INFO burn_train::learner::epoch: Iteration 21
+2025-10-02T16:54:21.458140Z  INFO burn_train::learner::epoch: Iteration 22
+2025-10-02T16:54:21.478099Z  INFO burn_train::learner::epoch: Iteration 23
+2025-10-02T16:54:21.500006Z  INFO burn_train::learner::epoch: Iteration 24
+2025-10-02T16:54:21.521305Z  INFO burn_train::learner::epoch: Iteration 25
+2025-10-02T16:54:21.541492Z  INFO burn_train::learner::epoch: Iteration 26
+2025-10-02T16:54:21.562398Z  INFO burn_train::learner::epoch: Iteration 27
+2025-10-02T16:54:21.583551Z  INFO burn_train::learner::epoch: Iteration 28
+2025-10-02T16:54:21.603327Z  INFO burn_train::learner::epoch: Iteration 29
+2025-10-02T16:54:21.624482Z  INFO burn_train::learner::epoch: Iteration 30
+2025-10-02T16:54:21.643282Z  INFO burn_train::learner::epoch: Iteration 31
+2025-10-02T16:54:21.662433Z  INFO burn_train::learner::epoch: Iteration 32
+2025-10-02T16:54:21.681307Z  INFO burn_train::learner::epoch: Iteration 33
+2025-10-02T16:54:21.700026Z  INFO burn_train::learner::epoch: Iteration 34
+2025-10-02T16:54:21.720137Z  INFO burn_train::learner::epoch: Iteration 35
+2025-10-02T16:54:21.740853Z  INFO burn_train::learner::epoch: Iteration 36
+2025-10-02T16:54:21.759980Z  INFO burn_train::learner::epoch: Iteration 37
+2025-10-02T16:54:21.778077Z  INFO burn_train::learner::epoch: Iteration 38
+2025-10-02T16:54:21.797100Z  INFO burn_train::learner::epoch: Iteration 39
+2025-10-02T16:54:21.816508Z  INFO burn_train::learner::epoch: Iteration 40
+2025-10-02T16:54:21.836503Z  INFO burn_train::learner::epoch: Iteration 41
+2025-10-02T16:54:21.857076Z  INFO burn_train::learner::epoch: Iteration 42
+2025-10-02T16:54:21.876522Z  INFO burn_train::learner::epoch: Iteration 43
+2025-10-02T16:54:21.895983Z  INFO burn_train::learner::epoch: Iteration 44
+2025-10-02T16:54:21.916145Z  INFO burn_train::learner::epoch: Iteration 45
+2025-10-02T16:54:21.935120Z  INFO burn_train::learner::epoch: Iteration 46
+2025-10-02T16:54:21.955365Z  INFO burn_train::learner::epoch: Iteration 47
+2025-10-02T16:54:21.976127Z  INFO burn_train::learner::epoch: Iteration 48
+2025-10-02T16:54:21.995665Z  INFO burn_train::learner::epoch: Iteration 49
+2025-10-02T16:54:22.014964Z  INFO burn_train::learner::epoch: Iteration 50
+2025-10-02T16:54:22.034162Z  INFO burn_train::learner::epoch: Iteration 51
+2025-10-02T16:54:22.053770Z  INFO burn_train::learner::epoch: Iteration 52
+2025-10-02T16:54:22.073759Z  INFO burn_train::learner::epoch: Executing validation step for epoch 2
+2025-10-02T16:54:22.161937Z  INFO burn_train::checkpoint::file: Saving checkpoint 2 to articats\checkpoint\model-2
+2025-10-02T16:54:22.161961Z  INFO burn_train::learner::epoch: Executing training step for epoch 3
+2025-10-02T16:54:22.161976Z  INFO burn_train::checkpoint::file: Saving checkpoint 2 to articats\checkpoint\optim-2
+2025-10-02T16:54:22.161977Z  INFO burn_train::checkpoint::file: Saving checkpoint 2 to articats\checkpoint\scheduler-2
+2025-10-02T16:54:22.163026Z  INFO burn_train::learner::epoch: Iteration 1
+2025-10-02T16:54:22.520030Z  INFO burn_train::learner::epoch: Iteration 2
+2025-10-02T16:54:22.559989Z  INFO cubecl_runtime::tune::tuner: Tuning FusedMatmulAutotuneKey - MatmulKey: MatmulAutotuneKey { definition: MatmulProblemDefinition { m: 128, n: 128, k: 512, lhs_pow2_factor: 3, rhs_pow2_factor: 3, elem_lhs: Float(F32), elem_rhs: Float(F32), elem_out: Float(F32), matrix_layout_lhs: Contiguous, matrix_layout_rhs: MildlyPermuted { transposed: true, batch_swap: false } }, analysis: MatmulAutotuneAnalysis { scale_global: Medium, kind: General } }, NumOutBuffers: 1, NumOps: 2
+2025-10-02T16:54:22.761769Z  INFO burn_train::learner::epoch: Iteration 3
+2025-10-02T16:54:22.806683Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 4, FuseNumWrites: 2, FuseNumOps: 16
+2025-10-02T16:54:23.054077Z  INFO burn_train::learner::epoch: Iteration 4
+2025-10-02T16:54:23.104094Z  INFO burn_train::learner::epoch: Iteration 5
+2025-10-02T16:54:23.154448Z  INFO burn_train::learner::epoch: Iteration 6
+2025-10-02T16:54:23.176705Z  INFO burn_train::learner::epoch: Iteration 7
+2025-10-02T16:54:23.198642Z  INFO burn_train::learner::epoch: Iteration 8
+2025-10-02T16:54:23.221735Z  INFO burn_train::learner::epoch: Iteration 9
+2025-10-02T16:54:23.243239Z  INFO burn_train::learner::epoch: Iteration 10
+2025-10-02T16:54:23.264207Z  INFO burn_train::learner::epoch: Iteration 11
+2025-10-02T16:54:23.284776Z  INFO burn_train::learner::epoch: Iteration 12
+2025-10-02T16:54:23.305606Z  INFO burn_train::learner::epoch: Iteration 13
+2025-10-02T16:54:23.327053Z  INFO burn_train::learner::epoch: Iteration 14
+2025-10-02T16:54:23.348035Z  INFO burn_train::learner::epoch: Iteration 15
+2025-10-02T16:54:23.369032Z  INFO burn_train::learner::epoch: Iteration 16
+2025-10-02T16:54:23.390100Z  INFO burn_train::learner::epoch: Iteration 17
+2025-10-02T16:54:23.412461Z  INFO burn_train::learner::epoch: Iteration 18
+2025-10-02T16:54:23.433404Z  INFO burn_train::learner::epoch: Iteration 19
+2025-10-02T16:54:23.453225Z  INFO burn_train::learner::epoch: Iteration 20
+2025-10-02T16:54:23.472687Z  INFO burn_train::learner::epoch: Iteration 21
+2025-10-02T16:54:23.492644Z  INFO burn_train::learner::epoch: Iteration 22
+2025-10-02T16:54:23.512287Z  INFO burn_train::learner::epoch: Iteration 23
+2025-10-02T16:54:23.533125Z  INFO burn_train::learner::epoch: Iteration 24
+2025-10-02T16:54:23.553559Z  INFO burn_train::learner::epoch: Iteration 25
+2025-10-02T16:54:23.573720Z  INFO burn_train::learner::epoch: Iteration 26
+2025-10-02T16:54:23.593321Z  INFO burn_train::learner::epoch: Iteration 27
+2025-10-02T16:54:23.614588Z  INFO burn_train::learner::epoch: Iteration 28
+2025-10-02T16:54:23.635945Z  INFO burn_train::learner::epoch: Iteration 29
+2025-10-02T16:54:23.655490Z  INFO burn_train::learner::epoch: Iteration 30
+2025-10-02T16:54:23.675149Z  INFO burn_train::learner::epoch: Iteration 31
+2025-10-02T16:54:23.694879Z  INFO burn_train::learner::epoch: Iteration 32
+2025-10-02T16:54:23.715960Z  INFO burn_train::learner::epoch: Iteration 33
+2025-10-02T16:54:23.737799Z  INFO burn_train::learner::epoch: Iteration 34
+2025-10-02T16:54:23.757145Z  INFO burn_train::learner::epoch: Iteration 35
+2025-10-02T16:54:23.775958Z  INFO burn_train::learner::epoch: Iteration 36
+2025-10-02T16:54:23.796176Z  INFO burn_train::learner::epoch: Iteration 37
+2025-10-02T16:54:23.817616Z  INFO burn_train::learner::epoch: Iteration 38
+2025-10-02T16:54:23.838045Z  INFO burn_train::learner::epoch: Iteration 39
+2025-10-02T16:54:23.859670Z  INFO burn_train::learner::epoch: Iteration 40
+2025-10-02T16:54:23.882588Z  INFO burn_train::learner::epoch: Iteration 41
+2025-10-02T16:54:23.906346Z  INFO burn_train::learner::epoch: Iteration 42
+2025-10-02T16:54:23.930129Z  INFO burn_train::learner::epoch: Iteration 43
+2025-10-02T16:54:23.954240Z  INFO burn_train::learner::epoch: Iteration 44
+2025-10-02T16:54:23.976248Z  INFO burn_train::learner::epoch: Iteration 45
+2025-10-02T16:54:23.999128Z  INFO burn_train::learner::epoch: Iteration 46
+2025-10-02T16:54:24.021902Z  INFO burn_train::learner::epoch: Iteration 47
+2025-10-02T16:54:24.043861Z  INFO burn_train::learner::epoch: Iteration 48
+2025-10-02T16:54:24.064873Z  INFO burn_train::learner::epoch: Iteration 49
+2025-10-02T16:54:24.085237Z  INFO burn_train::learner::epoch: Iteration 50
+2025-10-02T16:54:24.105980Z  INFO burn_train::learner::epoch: Iteration 51
+2025-10-02T16:54:24.127543Z  INFO burn_train::learner::epoch: Iteration 52
+2025-10-02T16:54:24.154345Z  INFO burn_train::learner::epoch: Executing validation step for epoch 3
+2025-10-02T16:54:24.251971Z  INFO burn_train::checkpoint::file: Saving checkpoint 3 to articats\checkpoint\model-3
+2025-10-02T16:54:24.251992Z  INFO burn_train::learner::epoch: Executing training step for epoch 4
+2025-10-02T16:54:24.252005Z  INFO burn_train::checkpoint::file: Saving checkpoint 3 to articats\checkpoint\scheduler-3
+2025-10-02T16:54:24.252002Z  INFO burn_train::checkpoint::file: Saving checkpoint 3 to articats\checkpoint\optim-3
+2025-10-02T16:54:24.253012Z  INFO burn_train::learner::epoch: Iteration 1
+2025-10-02T16:54:24.278885Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 2, FuseNumWrites: 1, FuseNumOps: 1
+2025-10-02T16:54:24.572874Z  INFO burn_train::learner::epoch: Iteration 2
+2025-10-02T16:54:24.608937Z  INFO cubecl_runtime::tune::tuner: Tuning FusedReduceAutotuneKey - ReduceKey: ReduceAutotuneKey { elem_input: Float(F32), elem_output: Float(F32), elem_acc: Float(F32), potential_line_size: 4, axis_is_contiguous: false, reduce_axis_shape: 16, reduce_count: 16384 }, FuseNumReads: 8, FuseNumWrites: 2, FuseNumOps: 16
+2025-10-02T16:54:24.910147Z  INFO burn_train::learner::epoch: Iteration 3
+2025-10-02T16:54:25.413378Z  INFO burn_train::learner::epoch: Iteration 4
+2025-10-02T16:54:25.817798Z  INFO burn_train::learner::epoch: Iteration 5
+2025-10-02T16:54:25.864623Z  INFO burn_train::learner::epoch: Iteration 6
+2025-10-02T16:54:25.884071Z  INFO burn_train::learner::epoch: Iteration 7
+2025-10-02T16:54:25.905185Z  INFO burn_train::learner::epoch: Iteration 8
+2025-10-02T16:54:25.924668Z  INFO burn_train::learner::epoch: Iteration 9
+2025-10-02T16:54:25.944091Z  INFO burn_train::learner::epoch: Iteration 10
+2025-10-02T16:54:25.963557Z  INFO burn_train::learner::epoch: Iteration 11
+2025-10-02T16:54:25.983683Z  INFO burn_train::learner::epoch: Iteration 12
+2025-10-02T16:54:26.004454Z  INFO burn_train::learner::epoch: Iteration 13
+2025-10-02T16:54:26.025059Z  INFO burn_train::learner::epoch: Iteration 14
+2025-10-02T16:54:26.044992Z  INFO burn_train::learner::epoch: Iteration 15
+2025-10-02T16:54:26.066874Z  INFO burn_train::learner::epoch: Iteration 16
+2025-10-02T16:54:26.090485Z  INFO burn_train::learner::epoch: Iteration 17
+2025-10-02T16:54:26.113139Z  INFO burn_train::learner::epoch: Iteration 18
+2025-10-02T16:54:26.135593Z  INFO burn_train::learner::epoch: Iteration 19
+2025-10-02T16:54:26.157445Z  INFO burn_train::learner::epoch: Iteration 20
+2025-10-02T16:54:26.178679Z  INFO burn_train::learner::epoch: Iteration 21
+2025-10-02T16:54:26.199280Z  INFO burn_train::learner::epoch: Iteration 22
+2025-10-02T16:54:26.220373Z  INFO burn_train::learner::epoch: Iteration 23
+2025-10-02T16:54:26.240967Z  INFO burn_train::learner::epoch: Iteration 24
+2025-10-02T16:54:26.260910Z  INFO burn_train::learner::epoch: Iteration 25
+2025-10-02T16:54:26.280742Z  INFO burn_train::learner::epoch: Iteration 26
+2025-10-02T16:54:26.301762Z  INFO burn_train::learner::epoch: Iteration 27
+2025-10-02T16:54:26.323352Z  INFO burn_train::learner::epoch: Iteration 28
+2025-10-02T16:54:26.342496Z  INFO burn_train::learner::epoch: Iteration 29
+2025-10-02T16:54:26.361832Z  INFO burn_train::learner::epoch: Iteration 30
+2025-10-02T16:54:26.380843Z  INFO burn_train::learner::epoch: Iteration 31
+2025-10-02T16:54:26.400792Z  INFO burn_train::learner::epoch: Iteration 32
+2025-10-02T16:54:26.422996Z  INFO burn_train::learner::epoch: Iteration 33
+2025-10-02T16:54:26.443716Z  INFO burn_train::learner::epoch: Iteration 34
+2025-10-02T16:54:26.463078Z  INFO burn_train::learner::epoch: Iteration 35
+2025-10-02T16:54:26.482766Z  INFO burn_train::learner::epoch: Iteration 36
+2025-10-02T16:54:26.502756Z  INFO burn_train::learner::epoch: Iteration 37
+2025-10-02T16:54:26.522660Z  INFO burn_train::learner::epoch: Iteration 38
+2025-10-02T16:54:26.542271Z  INFO burn_train::learner::epoch: Iteration 39
+2025-10-02T16:54:26.562247Z  INFO burn_train::learner::epoch: Iteration 40
+2025-10-02T16:54:26.581627Z  INFO burn_train::learner::epoch: Iteration 41
+2025-10-02T16:54:26.600855Z  INFO burn_train::learner::epoch: Iteration 42
+2025-10-02T16:54:26.621333Z  INFO burn_train::learner::epoch: Iteration 43
+2025-10-02T16:54:26.641523Z  INFO burn_train::learner::epoch: Iteration 44
+2025-10-02T16:54:26.661698Z  INFO burn_train::learner::epoch: Iteration 45
+2025-10-02T16:54:26.680835Z  INFO burn_train::learner::epoch: Iteration 46
+2025-10-02T16:54:26.700524Z  INFO burn_train::learner::epoch: Iteration 47
+2025-10-02T16:54:26.721681Z  INFO burn_train::learner::epoch: Iteration 48
+2025-10-02T16:54:26.742512Z  INFO burn_train::learner::epoch: Iteration 49
+2025-10-02T16:54:26.763674Z  INFO burn_train::learner::epoch: Iteration 50
+2025-10-02T16:54:26.782907Z  INFO burn_train::learner::epoch: Iteration 51
+2025-10-02T16:54:26.801998Z  INFO burn_train::learner::epoch: Iteration 52
+2025-10-02T16:54:26.822074Z  INFO burn_train::learner::epoch: Executing validation step for epoch 4
+2025-10-02T16:54:26.910495Z  INFO burn_train::checkpoint::file: Saving checkpoint 4 to articats\checkpoint\model-4
+2025-10-02T16:54:26.910515Z  INFO burn_train::checkpoint::file: Saving checkpoint 4 to articats\checkpoint\optim-4
+2025-10-02T16:54:26.910525Z  INFO burn_train::checkpoint::file: Saving checkpoint 4 to articats\checkpoint\scheduler-4
+2025-10-02T16:54:26.987138Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\model-2.mpk
+2025-10-02T16:54:27.080142Z  INFO burn_train::learner::epoch: Executing training step for epoch 5
+2025-10-02T16:54:27.080480Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\scheduler-2.mpk
+2025-10-02T16:54:27.080483Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\optim-2.mpk
+2025-10-02T16:54:27.080622Z  INFO burn_train::learner::epoch: Iteration 1
+2025-10-02T16:54:27.111415Z  INFO burn_train::learner::epoch: Iteration 2
+2025-10-02T16:54:27.131218Z  INFO burn_train::learner::epoch: Iteration 3
+2025-10-02T16:54:27.150917Z  INFO burn_train::learner::epoch: Iteration 4
+2025-10-02T16:54:27.173373Z  INFO burn_train::learner::epoch: Iteration 5
+2025-10-02T16:54:27.196321Z  INFO burn_train::learner::epoch: Iteration 6
+2025-10-02T16:54:27.216405Z  INFO burn_train::learner::epoch: Iteration 7
+2025-10-02T16:54:27.236687Z  INFO burn_train::learner::epoch: Iteration 8
+2025-10-02T16:54:27.260990Z  INFO burn_train::learner::epoch: Iteration 9
+2025-10-02T16:54:27.282494Z  INFO burn_train::learner::epoch: Iteration 10
+2025-10-02T16:54:27.301753Z  INFO burn_train::learner::epoch: Iteration 11
+2025-10-02T16:54:27.321502Z  INFO burn_train::learner::epoch: Iteration 12
+2025-10-02T16:54:27.341079Z  INFO burn_train::learner::epoch: Iteration 13
+2025-10-02T16:54:27.361502Z  INFO burn_train::learner::epoch: Iteration 14
+2025-10-02T16:54:27.383645Z  INFO burn_train::learner::epoch: Iteration 15
+2025-10-02T16:54:27.404565Z  INFO burn_train::learner::epoch: Iteration 16
+2025-10-02T16:54:27.424666Z  INFO burn_train::learner::epoch: Iteration 17
+2025-10-02T16:54:27.444081Z  INFO burn_train::learner::epoch: Iteration 18
+2025-10-02T16:54:27.463722Z  INFO burn_train::learner::epoch: Iteration 19
+2025-10-02T16:54:27.487739Z  INFO burn_train::learner::epoch: Iteration 20
+2025-10-02T16:54:27.507081Z  INFO burn_train::learner::epoch: Iteration 21
+2025-10-02T16:54:27.526319Z  INFO burn_train::learner::epoch: Iteration 22
+2025-10-02T16:54:27.545548Z  INFO burn_train::learner::epoch: Iteration 23
+2025-10-02T16:54:27.565968Z  INFO burn_train::learner::epoch: Iteration 24
+2025-10-02T16:54:27.586773Z  INFO burn_train::learner::epoch: Iteration 25
+2025-10-02T16:54:27.605782Z  INFO burn_train::learner::epoch: Iteration 26
+2025-10-02T16:54:27.624671Z  INFO burn_train::learner::epoch: Iteration 27
+2025-10-02T16:54:27.643835Z  INFO burn_train::learner::epoch: Iteration 28
+2025-10-02T16:54:27.662856Z  INFO burn_train::learner::epoch: Iteration 29
+2025-10-02T16:54:27.681799Z  INFO burn_train::learner::epoch: Iteration 30
+2025-10-02T16:54:27.702415Z  INFO burn_train::learner::epoch: Iteration 31
+2025-10-02T16:54:27.723993Z  INFO burn_train::learner::epoch: Iteration 32
+2025-10-02T16:54:27.743546Z  INFO burn_train::learner::epoch: Iteration 33
+2025-10-02T16:54:27.762817Z  INFO burn_train::learner::epoch: Iteration 34
+2025-10-02T16:54:27.782029Z  INFO burn_train::learner::epoch: Iteration 35
+2025-10-02T16:54:27.801939Z  INFO burn_train::learner::epoch: Iteration 36
+2025-10-02T16:54:27.823991Z  INFO burn_train::learner::epoch: Iteration 37
+2025-10-02T16:54:27.846895Z  INFO burn_train::learner::epoch: Iteration 38
+2025-10-02T16:54:27.868683Z  INFO burn_train::learner::epoch: Iteration 39
+2025-10-02T16:54:27.890930Z  INFO burn_train::learner::epoch: Iteration 40
+2025-10-02T16:54:27.913552Z  INFO burn_train::learner::epoch: Iteration 41
+2025-10-02T16:54:27.937929Z  INFO burn_train::learner::epoch: Iteration 42
+2025-10-02T16:54:27.959803Z  INFO burn_train::learner::epoch: Iteration 43
+2025-10-02T16:54:27.979917Z  INFO burn_train::learner::epoch: Iteration 44
+2025-10-02T16:54:28.000404Z  INFO burn_train::learner::epoch: Iteration 45
+2025-10-02T16:54:28.020621Z  INFO burn_train::learner::epoch: Iteration 46
+2025-10-02T16:54:28.042283Z  INFO burn_train::learner::epoch: Iteration 47
+2025-10-02T16:54:28.063649Z  INFO burn_train::learner::epoch: Iteration 48
+2025-10-02T16:54:28.086031Z  INFO burn_train::learner::epoch: Iteration 49
+2025-10-02T16:54:28.109077Z  INFO burn_train::learner::epoch: Iteration 50
+2025-10-02T16:54:28.131854Z  INFO burn_train::learner::epoch: Iteration 51
+2025-10-02T16:54:28.155575Z  INFO burn_train::learner::epoch: Iteration 52
+2025-10-02T16:54:28.177947Z  INFO burn_train::learner::epoch: Executing validation step for epoch 5
+2025-10-02T16:54:28.276704Z  INFO burn_train::checkpoint::file: Saving checkpoint 5 to articats\checkpoint\model-5
+2025-10-02T16:54:28.276730Z  INFO burn_train::checkpoint::file: Saving checkpoint 5 to articats\checkpoint\optim-5
+2025-10-02T16:54:28.276738Z  INFO burn_train::checkpoint::file: Saving checkpoint 5 to articats\checkpoint\scheduler-5
+2025-10-02T16:54:28.341973Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\model-3.mpk
+2025-10-02T16:54:28.449952Z  INFO burn_train::learner::epoch: Executing training step for epoch 6
+2025-10-02T16:54:28.450250Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\optim-3.mpk
+2025-10-02T16:54:28.450324Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\scheduler-3.mpk
+2025-10-02T16:54:28.450517Z  INFO burn_train::learner::epoch: Iteration 1
+2025-10-02T16:54:28.471370Z  INFO burn_train::learner::epoch: Iteration 2
+2025-10-02T16:54:28.493088Z  INFO burn_train::learner::epoch: Iteration 3
+2025-10-02T16:54:28.515713Z  INFO burn_train::learner::epoch: Iteration 4
+2025-10-02T16:54:28.540891Z  INFO burn_train::learner::epoch: Iteration 5
+2025-10-02T16:54:28.561530Z  INFO burn_train::learner::epoch: Iteration 6
+2025-10-02T16:54:28.582314Z  INFO burn_train::learner::epoch: Iteration 7
+2025-10-02T16:54:28.604676Z  INFO burn_train::learner::epoch: Iteration 8
+2025-10-02T16:54:28.625647Z  INFO burn_train::learner::epoch: Iteration 9
+2025-10-02T16:54:28.647806Z  INFO burn_train::learner::epoch: Iteration 10
+2025-10-02T16:54:28.669311Z  INFO burn_train::learner::epoch: Iteration 11
+2025-10-02T16:54:28.689421Z  INFO burn_train::learner::epoch: Iteration 12
+2025-10-02T16:54:28.709788Z  INFO burn_train::learner::epoch: Iteration 13
+2025-10-02T16:54:28.729944Z  INFO burn_train::learner::epoch: Iteration 14
+2025-10-02T16:54:28.751801Z  INFO burn_train::learner::epoch: Iteration 15
+2025-10-02T16:54:28.771532Z  INFO burn_train::learner::epoch: Iteration 16
+2025-10-02T16:54:28.791404Z  INFO burn_train::learner::epoch: Iteration 17
+2025-10-02T16:54:28.811721Z  INFO burn_train::learner::epoch: Iteration 18
+2025-10-02T16:54:28.832985Z  INFO burn_train::learner::epoch: Iteration 19
+2025-10-02T16:54:28.854548Z  INFO burn_train::learner::epoch: Iteration 20
+2025-10-02T16:54:28.875192Z  INFO burn_train::learner::epoch: Iteration 21
+2025-10-02T16:54:28.896650Z  INFO burn_train::learner::epoch: Iteration 22
+2025-10-02T16:54:28.917724Z  INFO burn_train::learner::epoch: Iteration 23
+2025-10-02T16:54:28.941025Z  INFO burn_train::learner::epoch: Iteration 24
+2025-10-02T16:54:28.963713Z  INFO burn_train::learner::epoch: Iteration 25
+2025-10-02T16:54:28.984521Z  INFO burn_train::learner::epoch: Iteration 26
+2025-10-02T16:54:29.004230Z  INFO burn_train::learner::epoch: Iteration 27
+2025-10-02T16:54:29.024088Z  INFO burn_train::learner::epoch: Iteration 28
+2025-10-02T16:54:29.044012Z  INFO burn_train::learner::epoch: Iteration 29
+2025-10-02T16:54:29.066380Z  INFO burn_train::learner::epoch: Iteration 30
+2025-10-02T16:54:29.086430Z  INFO burn_train::learner::epoch: Iteration 31
+2025-10-02T16:54:29.106106Z  INFO burn_train::learner::epoch: Iteration 32
+2025-10-02T16:54:29.127378Z  INFO burn_train::learner::epoch: Iteration 33
+2025-10-02T16:54:29.150853Z  INFO burn_train::learner::epoch: Iteration 34
+2025-10-02T16:54:29.174041Z  INFO burn_train::learner::epoch: Iteration 35
+2025-10-02T16:54:29.196332Z  INFO burn_train::learner::epoch: Iteration 36
+2025-10-02T16:54:29.218498Z  INFO burn_train::learner::epoch: Iteration 37
+2025-10-02T16:54:29.239680Z  INFO burn_train::learner::epoch: Iteration 38
+2025-10-02T16:54:29.261610Z  INFO burn_train::learner::epoch: Iteration 39
+2025-10-02T16:54:29.283417Z  INFO burn_train::learner::epoch: Iteration 40
+2025-10-02T16:54:29.303555Z  INFO burn_train::learner::epoch: Iteration 41
+2025-10-02T16:54:29.323790Z  INFO burn_train::learner::epoch: Iteration 42
+2025-10-02T16:54:29.343758Z  INFO burn_train::learner::epoch: Iteration 43
+2025-10-02T16:54:29.364915Z  INFO burn_train::learner::epoch: Iteration 44
+2025-10-02T16:54:29.387012Z  INFO burn_train::learner::epoch: Iteration 45
+2025-10-02T16:54:29.408591Z  INFO burn_train::learner::epoch: Iteration 46
+2025-10-02T16:54:29.430326Z  INFO burn_train::learner::epoch: Iteration 47
+2025-10-02T16:54:29.451247Z  INFO burn_train::learner::epoch: Iteration 48
+2025-10-02T16:54:29.472128Z  INFO burn_train::learner::epoch: Iteration 49
+2025-10-02T16:54:29.496862Z  INFO burn_train::learner::epoch: Iteration 50
+2025-10-02T16:54:29.517316Z  INFO burn_train::learner::epoch: Iteration 51
+2025-10-02T16:54:29.539011Z  INFO burn_train::learner::epoch: Iteration 52
+2025-10-02T16:54:29.559346Z  INFO burn_train::learner::epoch: Executing validation step for epoch 6
+2025-10-02T16:54:29.649816Z  INFO burn_train::checkpoint::file: Saving checkpoint 6 to articats\checkpoint\model-6
+2025-10-02T16:54:29.649859Z  INFO burn_train::checkpoint::file: Saving checkpoint 6 to articats\checkpoint\scheduler-6
+2025-10-02T16:54:29.649860Z  INFO burn_train::checkpoint::file: Saving checkpoint 6 to articats\checkpoint\optim-6
+2025-10-02T16:54:29.726592Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\model-4.mpk
+2025-10-02T16:54:29.840285Z  INFO burn_train::learner::epoch: Executing training step for epoch 7
+2025-10-02T16:54:29.840607Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\optim-4.mpk
+2025-10-02T16:54:29.840628Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\scheduler-4.mpk
+2025-10-02T16:54:29.840842Z  INFO burn_train::learner::epoch: Iteration 1
+2025-10-02T16:54:29.864545Z  INFO burn_train::learner::epoch: Iteration 2
+2025-10-02T16:54:29.887275Z  INFO burn_train::learner::epoch: Iteration 3
+2025-10-02T16:54:29.910059Z  INFO burn_train::learner::epoch: Iteration 4
+2025-10-02T16:54:29.932277Z  INFO burn_train::learner::epoch: Iteration 5
+2025-10-02T16:54:29.953927Z  INFO burn_train::learner::epoch: Iteration 6
+2025-10-02T16:54:29.973939Z  INFO burn_train::learner::epoch: Iteration 7
+2025-10-02T16:54:29.993965Z  INFO burn_train::learner::epoch: Iteration 8
+2025-10-02T16:54:30.015058Z  INFO burn_train::learner::epoch: Iteration 9
+2025-10-02T16:54:30.037147Z  INFO burn_train::learner::epoch: Iteration 10
+2025-10-02T16:54:30.060396Z  INFO burn_train::learner::epoch: Iteration 11
+2025-10-02T16:54:30.080936Z  INFO burn_train::learner::epoch: Iteration 12
+2025-10-02T16:54:30.101739Z  INFO burn_train::learner::epoch: Iteration 13
+2025-10-02T16:54:30.122742Z  INFO burn_train::learner::epoch: Iteration 14
+2025-10-02T16:54:30.144756Z  INFO burn_train::learner::epoch: Iteration 15
+2025-10-02T16:54:30.165271Z  INFO burn_train::learner::epoch: Iteration 16
+2025-10-02T16:54:30.185558Z  INFO burn_train::learner::epoch: Iteration 17
+2025-10-02T16:54:30.205272Z  INFO burn_train::learner::epoch: Iteration 18
+2025-10-02T16:54:30.225788Z  INFO burn_train::learner::epoch: Iteration 19
+2025-10-02T16:54:30.248384Z  INFO burn_train::learner::epoch: Iteration 20
+2025-10-02T16:54:30.268197Z  INFO burn_train::learner::epoch: Iteration 21
+2025-10-02T16:54:30.287805Z  INFO burn_train::learner::epoch: Iteration 22
+2025-10-02T16:54:30.307774Z  INFO burn_train::learner::epoch: Iteration 23
+2025-10-02T16:54:30.328180Z  INFO burn_train::learner::epoch: Iteration 24
+2025-10-02T16:54:30.348837Z  INFO burn_train::learner::epoch: Iteration 25
+2025-10-02T16:54:30.369408Z  INFO burn_train::learner::epoch: Iteration 26
+2025-10-02T16:54:30.391351Z  INFO burn_train::learner::epoch: Iteration 27
+2025-10-02T16:54:30.412589Z  INFO burn_train::learner::epoch: Iteration 28
+2025-10-02T16:54:30.434068Z  INFO burn_train::learner::epoch: Iteration 29
+2025-10-02T16:54:30.456473Z  INFO burn_train::learner::epoch: Iteration 30
+2025-10-02T16:54:30.477222Z  INFO burn_train::learner::epoch: Iteration 31
+2025-10-02T16:54:30.497637Z  INFO burn_train::learner::epoch: Iteration 32
+2025-10-02T16:54:30.518283Z  INFO burn_train::learner::epoch: Iteration 33
+2025-10-02T16:54:30.539427Z  INFO burn_train::learner::epoch: Iteration 34
+2025-10-02T16:54:30.561410Z  INFO burn_train::learner::epoch: Iteration 35
+2025-10-02T16:54:30.582324Z  INFO burn_train::learner::epoch: Iteration 36
+2025-10-02T16:54:30.603605Z  INFO burn_train::learner::epoch: Iteration 37
+2025-10-02T16:54:30.625677Z  INFO burn_train::learner::epoch: Iteration 38
+2025-10-02T16:54:30.646726Z  INFO burn_train::learner::epoch: Iteration 39
+2025-10-02T16:54:30.668135Z  INFO burn_train::learner::epoch: Iteration 40
+2025-10-02T16:54:30.687789Z  INFO burn_train::learner::epoch: Iteration 41
+2025-10-02T16:54:30.707385Z  INFO burn_train::learner::epoch: Iteration 42
+2025-10-02T16:54:30.728335Z  INFO burn_train::learner::epoch: Iteration 43
+2025-10-02T16:54:30.749542Z  INFO burn_train::learner::epoch: Iteration 44
+2025-10-02T16:54:30.771031Z  INFO burn_train::learner::epoch: Iteration 45
+2025-10-02T16:54:30.791934Z  INFO burn_train::learner::epoch: Iteration 46
+2025-10-02T16:54:30.814266Z  INFO burn_train::learner::epoch: Iteration 47
+2025-10-02T16:54:30.836184Z  INFO burn_train::learner::epoch: Iteration 48
+2025-10-02T16:54:30.856094Z  INFO burn_train::learner::epoch: Iteration 49
+2025-10-02T16:54:30.876992Z  INFO burn_train::learner::epoch: Iteration 50
+2025-10-02T16:54:30.897659Z  INFO burn_train::learner::epoch: Iteration 51
+2025-10-02T16:54:30.917367Z  INFO burn_train::learner::epoch: Iteration 52
+2025-10-02T16:54:30.937768Z  INFO burn_train::learner::epoch: Executing validation step for epoch 7
+2025-10-02T16:54:31.029213Z  INFO burn_train::checkpoint::file: Saving checkpoint 7 to articats\checkpoint\model-7
+2025-10-02T16:54:31.029250Z  INFO burn_train::checkpoint::file: Saving checkpoint 7 to articats\checkpoint\scheduler-7
+2025-10-02T16:54:31.029250Z  INFO burn_train::checkpoint::file: Saving checkpoint 7 to articats\checkpoint\optim-7
+2025-10-02T16:54:31.114321Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\model-5.mpk
+2025-10-02T16:54:31.212079Z  INFO burn_train::learner::epoch: Executing training step for epoch 8
+2025-10-02T16:54:31.212272Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\optim-5.mpk
+2025-10-02T16:54:31.212342Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\scheduler-5.mpk
+2025-10-02T16:54:31.212485Z  INFO burn_train::learner::epoch: Iteration 1
+2025-10-02T16:54:31.233274Z  INFO burn_train::learner::epoch: Iteration 2
+2025-10-02T16:54:31.254084Z  INFO burn_train::learner::epoch: Iteration 3
+2025-10-02T16:54:31.275033Z  INFO burn_train::learner::epoch: Iteration 4
+2025-10-02T16:54:31.296918Z  INFO burn_train::learner::epoch: Iteration 5
+2025-10-02T16:54:31.316672Z  INFO burn_train::learner::epoch: Iteration 6
+2025-10-02T16:54:31.336520Z  INFO burn_train::learner::epoch: Iteration 7
+2025-10-02T16:54:31.356617Z  INFO burn_train::learner::epoch: Iteration 8
+2025-10-02T16:54:31.376545Z  INFO burn_train::learner::epoch: Iteration 9
+2025-10-02T16:54:31.403463Z  INFO burn_train::learner::epoch: Iteration 10
+2025-10-02T16:54:31.424862Z  INFO burn_train::learner::epoch: Iteration 11
+2025-10-02T16:54:31.445990Z  INFO burn_train::learner::epoch: Iteration 12
+2025-10-02T16:54:31.465916Z  INFO burn_train::learner::epoch: Iteration 13
+2025-10-02T16:54:31.486025Z  INFO burn_train::learner::epoch: Iteration 14
+2025-10-02T16:54:31.509261Z  INFO burn_train::learner::epoch: Iteration 15
+2025-10-02T16:54:31.529795Z  INFO burn_train::learner::epoch: Iteration 16
+2025-10-02T16:54:31.551028Z  INFO burn_train::learner::epoch: Iteration 17
+2025-10-02T16:54:31.571844Z  INFO burn_train::learner::epoch: Iteration 18
+2025-10-02T16:54:31.592947Z  INFO burn_train::learner::epoch: Iteration 19
+2025-10-02T16:54:31.613460Z  INFO burn_train::learner::epoch: Iteration 20
+2025-10-02T16:54:31.633950Z  INFO burn_train::learner::epoch: Iteration 21
+2025-10-02T16:54:31.652917Z  INFO burn_train::learner::epoch: Iteration 22
+2025-10-02T16:54:31.672521Z  INFO burn_train::learner::epoch: Iteration 23
+2025-10-02T16:54:31.692305Z  INFO burn_train::learner::epoch: Iteration 24
+2025-10-02T16:54:31.713812Z  INFO burn_train::learner::epoch: Iteration 25
+2025-10-02T16:54:31.734554Z  INFO burn_train::learner::epoch: Iteration 26
+2025-10-02T16:54:31.754402Z  INFO burn_train::learner::epoch: Iteration 27
+2025-10-02T16:54:31.774677Z  INFO burn_train::learner::epoch: Iteration 28
+2025-10-02T16:54:31.795231Z  INFO burn_train::learner::epoch: Iteration 29
+2025-10-02T16:54:31.816133Z  INFO burn_train::learner::epoch: Iteration 30
+2025-10-02T16:54:31.835738Z  INFO burn_train::learner::epoch: Iteration 31
+2025-10-02T16:54:31.854746Z  INFO burn_train::learner::epoch: Iteration 32
+2025-10-02T16:54:31.874615Z  INFO burn_train::learner::epoch: Iteration 33
+2025-10-02T16:54:31.895121Z  INFO burn_train::learner::epoch: Iteration 34
+2025-10-02T16:54:31.915355Z  INFO burn_train::learner::epoch: Iteration 35
+2025-10-02T16:54:31.936518Z  INFO burn_train::learner::epoch: Iteration 36
+2025-10-02T16:54:31.956536Z  INFO burn_train::learner::epoch: Iteration 37
+2025-10-02T16:54:31.976220Z  INFO burn_train::learner::epoch: Iteration 38
+2025-10-02T16:54:31.996048Z  INFO burn_train::learner::epoch: Iteration 39
+2025-10-02T16:54:32.016649Z  INFO burn_train::learner::epoch: Iteration 40
+2025-10-02T16:54:32.046127Z  INFO burn_train::learner::epoch: Iteration 41
+2025-10-02T16:54:32.068051Z  INFO burn_train::learner::epoch: Iteration 42
+2025-10-02T16:54:32.088718Z  INFO burn_train::learner::epoch: Iteration 43
+2025-10-02T16:54:32.108460Z  INFO burn_train::learner::epoch: Iteration 44
+2025-10-02T16:54:32.129233Z  INFO burn_train::learner::epoch: Iteration 45
+2025-10-02T16:54:32.151503Z  INFO burn_train::learner::epoch: Iteration 46
+2025-10-02T16:54:32.173794Z  INFO burn_train::learner::epoch: Iteration 47
+2025-10-02T16:54:32.194258Z  INFO burn_train::learner::epoch: Iteration 48
+2025-10-02T16:54:32.214848Z  INFO burn_train::learner::epoch: Iteration 49
+2025-10-02T16:54:32.236125Z  INFO burn_train::learner::epoch: Iteration 50
+2025-10-02T16:54:32.257791Z  INFO burn_train::learner::epoch: Iteration 51
+2025-10-02T16:54:32.278446Z  INFO burn_train::learner::epoch: Iteration 52
+2025-10-02T16:54:32.298020Z  INFO burn_train::learner::epoch: Executing validation step for epoch 8
+2025-10-02T16:54:32.389175Z  INFO burn_train::checkpoint::file: Saving checkpoint 8 to articats\checkpoint\model-8
+2025-10-02T16:54:32.389221Z  INFO burn_train::checkpoint::file: Saving checkpoint 8 to articats\checkpoint\scheduler-8
+2025-10-02T16:54:32.389228Z  INFO burn_train::checkpoint::file: Saving checkpoint 8 to articats\checkpoint\optim-8
+2025-10-02T16:54:32.468837Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\model-6.mpk
+2025-10-02T16:54:32.567590Z  INFO burn_train::learner::epoch: Executing training step for epoch 9
+2025-10-02T16:54:32.567798Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\optim-6.mpk
+2025-10-02T16:54:32.567821Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\scheduler-6.mpk
+2025-10-02T16:54:32.568036Z  INFO burn_train::learner::epoch: Iteration 1
+2025-10-02T16:54:32.589118Z  INFO burn_train::learner::epoch: Iteration 2
+2025-10-02T16:54:32.609871Z  INFO burn_train::learner::epoch: Iteration 3
+2025-10-02T16:54:32.634456Z  INFO burn_train::learner::epoch: Iteration 4
+2025-10-02T16:54:32.655725Z  INFO burn_train::learner::epoch: Iteration 5
+2025-10-02T16:54:32.675530Z  INFO burn_train::learner::epoch: Iteration 6
+2025-10-02T16:54:32.695707Z  INFO burn_train::learner::epoch: Iteration 7
+2025-10-02T16:54:32.716348Z  INFO burn_train::learner::epoch: Iteration 8
+2025-10-02T16:54:32.737430Z  INFO burn_train::learner::epoch: Iteration 9
+2025-10-02T16:54:32.759907Z  INFO burn_train::learner::epoch: Iteration 10
+2025-10-02T16:54:32.779931Z  INFO burn_train::learner::epoch: Iteration 11
+2025-10-02T16:54:32.800489Z  INFO burn_train::learner::epoch: Iteration 12
+2025-10-02T16:54:32.821163Z  INFO burn_train::learner::epoch: Iteration 13
+2025-10-02T16:54:32.841831Z  INFO burn_train::learner::epoch: Iteration 14
+2025-10-02T16:54:32.863518Z  INFO burn_train::learner::epoch: Iteration 15
+2025-10-02T16:54:32.884100Z  INFO burn_train::learner::epoch: Iteration 16
+2025-10-02T16:54:32.904777Z  INFO burn_train::learner::epoch: Iteration 17
+2025-10-02T16:54:32.925183Z  INFO burn_train::learner::epoch: Iteration 18
+2025-10-02T16:54:32.945430Z  INFO burn_train::learner::epoch: Iteration 19
+2025-10-02T16:54:32.967522Z  INFO burn_train::learner::epoch: Iteration 20
+2025-10-02T16:54:32.987897Z  INFO burn_train::learner::epoch: Iteration 21
+2025-10-02T16:54:33.008323Z  INFO burn_train::learner::epoch: Iteration 22
+2025-10-02T16:54:33.029698Z  INFO burn_train::learner::epoch: Iteration 23
+2025-10-02T16:54:33.051248Z  INFO burn_train::learner::epoch: Iteration 24
+2025-10-02T16:54:33.072391Z  INFO burn_train::learner::epoch: Iteration 25
+2025-10-02T16:54:33.092215Z  INFO burn_train::learner::epoch: Iteration 26
+2025-10-02T16:54:33.111935Z  INFO burn_train::learner::epoch: Iteration 27
+2025-10-02T16:54:33.132729Z  INFO burn_train::learner::epoch: Iteration 28
+2025-10-02T16:54:33.153519Z  INFO burn_train::learner::epoch: Iteration 29
+2025-10-02T16:54:33.175026Z  INFO burn_train::learner::epoch: Iteration 30
+2025-10-02T16:54:33.197218Z  INFO burn_train::learner::epoch: Iteration 31
+2025-10-02T16:54:33.217060Z  INFO burn_train::learner::epoch: Iteration 32
+2025-10-02T16:54:33.237591Z  INFO burn_train::learner::epoch: Iteration 33
+2025-10-02T16:54:33.259156Z  INFO burn_train::learner::epoch: Iteration 34
+2025-10-02T16:54:33.282547Z  INFO burn_train::learner::epoch: Iteration 35
+2025-10-02T16:54:33.304116Z  INFO burn_train::learner::epoch: Iteration 36
+2025-10-02T16:54:33.325621Z  INFO burn_train::learner::epoch: Iteration 37
+2025-10-02T16:54:33.350399Z  INFO burn_train::learner::epoch: Iteration 38
+2025-10-02T16:54:33.370641Z  INFO burn_train::learner::epoch: Iteration 39
+2025-10-02T16:54:33.392067Z  INFO burn_train::learner::epoch: Iteration 40
+2025-10-02T16:54:33.413869Z  INFO burn_train::learner::epoch: Iteration 41
+2025-10-02T16:54:33.435455Z  INFO burn_train::learner::epoch: Iteration 42
+2025-10-02T16:54:33.455988Z  INFO burn_train::learner::epoch: Iteration 43
+2025-10-02T16:54:33.476408Z  INFO burn_train::learner::epoch: Iteration 44
+2025-10-02T16:54:33.498875Z  INFO burn_train::learner::epoch: Iteration 45
+2025-10-02T16:54:33.519729Z  INFO burn_train::learner::epoch: Iteration 46
+2025-10-02T16:54:33.539871Z  INFO burn_train::learner::epoch: Iteration 47
+2025-10-02T16:54:33.560364Z  INFO burn_train::learner::epoch: Iteration 48
+2025-10-02T16:54:33.583300Z  INFO burn_train::learner::epoch: Iteration 49
+2025-10-02T16:54:33.605278Z  INFO burn_train::learner::epoch: Iteration 50
+2025-10-02T16:54:33.625041Z  INFO burn_train::learner::epoch: Iteration 51
+2025-10-02T16:54:33.644678Z  INFO burn_train::learner::epoch: Iteration 52
+2025-10-02T16:54:33.665241Z  INFO burn_train::learner::epoch: Executing validation step for epoch 9
+2025-10-02T16:54:33.757899Z  INFO burn_train::checkpoint::file: Saving checkpoint 9 to articats\checkpoint\model-9
+2025-10-02T16:54:33.757926Z  INFO burn_train::checkpoint::file: Saving checkpoint 9 to articats\checkpoint\optim-9
+2025-10-02T16:54:33.757927Z  INFO burn_train::checkpoint::file: Saving checkpoint 9 to articats\checkpoint\scheduler-9
+2025-10-02T16:54:33.838841Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\model-7.mpk
+2025-10-02T16:54:33.954077Z  INFO burn_train::learner::epoch: Executing training step for epoch 10
+2025-10-02T16:54:33.954265Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\optim-7.mpk
+2025-10-02T16:54:33.954315Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\scheduler-7.mpk
+2025-10-02T16:54:33.954509Z  INFO burn_train::learner::epoch: Iteration 1
+2025-10-02T16:54:33.976431Z  INFO burn_train::learner::epoch: Iteration 2
+2025-10-02T16:54:33.997149Z  INFO burn_train::learner::epoch: Iteration 3
+2025-10-02T16:54:34.017878Z  INFO burn_train::learner::epoch: Iteration 4
+2025-10-02T16:54:34.039381Z  INFO burn_train::learner::epoch: Iteration 5
+2025-10-02T16:54:34.058897Z  INFO burn_train::learner::epoch: Iteration 6
+2025-10-02T16:54:34.078366Z  INFO burn_train::learner::epoch: Iteration 7
+2025-10-02T16:54:34.098088Z  INFO burn_train::learner::epoch: Iteration 8
+2025-10-02T16:54:34.118391Z  INFO burn_train::learner::epoch: Iteration 9
+2025-10-02T16:54:34.141159Z  INFO burn_train::learner::epoch: Iteration 10
+2025-10-02T16:54:34.161935Z  INFO burn_train::learner::epoch: Iteration 11
+2025-10-02T16:54:34.181608Z  INFO burn_train::learner::epoch: Iteration 12
+2025-10-02T16:54:34.202596Z  INFO burn_train::learner::epoch: Iteration 13
+2025-10-02T16:54:34.223177Z  INFO burn_train::learner::epoch: Iteration 14
+2025-10-02T16:54:34.244173Z  INFO burn_train::learner::epoch: Iteration 15
+2025-10-02T16:54:34.264124Z  INFO burn_train::learner::epoch: Iteration 16
+2025-10-02T16:54:34.285421Z  INFO burn_train::learner::epoch: Iteration 17
+2025-10-02T16:54:34.308714Z  INFO burn_train::learner::epoch: Iteration 18
+2025-10-02T16:54:34.331499Z  INFO burn_train::learner::epoch: Iteration 19
+2025-10-02T16:54:34.356176Z  INFO burn_train::learner::epoch: Iteration 20
+2025-10-02T16:54:34.375971Z  INFO burn_train::learner::epoch: Iteration 21
+2025-10-02T16:54:34.396810Z  INFO burn_train::learner::epoch: Iteration 22
+2025-10-02T16:54:34.418958Z  INFO burn_train::learner::epoch: Iteration 23
+2025-10-02T16:54:34.440391Z  INFO burn_train::learner::epoch: Iteration 24
+2025-10-02T16:54:34.461692Z  INFO burn_train::learner::epoch: Iteration 25
+2025-10-02T16:54:34.481479Z  INFO burn_train::learner::epoch: Iteration 26
+2025-10-02T16:54:34.501617Z  INFO burn_train::learner::epoch: Iteration 27
+2025-10-02T16:54:34.522577Z  INFO burn_train::learner::epoch: Iteration 28
+2025-10-02T16:54:34.545024Z  INFO burn_train::learner::epoch: Iteration 29
+2025-10-02T16:54:34.569028Z  INFO burn_train::learner::epoch: Iteration 30
+2025-10-02T16:54:34.590727Z  INFO burn_train::learner::epoch: Iteration 31
+2025-10-02T16:54:34.611570Z  INFO burn_train::learner::epoch: Iteration 32
+2025-10-02T16:54:34.634367Z  INFO burn_train::learner::epoch: Iteration 33
+2025-10-02T16:54:34.655394Z  INFO burn_train::learner::epoch: Iteration 34
+2025-10-02T16:54:34.676501Z  INFO burn_train::learner::epoch: Iteration 35
+2025-10-02T16:54:34.696581Z  INFO burn_train::learner::epoch: Iteration 36
+2025-10-02T16:54:34.717032Z  INFO burn_train::learner::epoch: Iteration 37
+2025-10-02T16:54:34.737785Z  INFO burn_train::learner::epoch: Iteration 38
+2025-10-02T16:54:34.758595Z  INFO burn_train::learner::epoch: Iteration 39
+2025-10-02T16:54:34.780016Z  INFO burn_train::learner::epoch: Iteration 40
+2025-10-02T16:54:34.800371Z  INFO burn_train::learner::epoch: Iteration 41
+2025-10-02T16:54:34.820744Z  INFO burn_train::learner::epoch: Iteration 42
+2025-10-02T16:54:34.840890Z  INFO burn_train::learner::epoch: Iteration 43
+2025-10-02T16:54:34.861913Z  INFO burn_train::learner::epoch: Iteration 44
+2025-10-02T16:54:34.883057Z  INFO burn_train::learner::epoch: Iteration 45
+2025-10-02T16:54:34.903196Z  INFO burn_train::learner::epoch: Iteration 46
+2025-10-02T16:54:34.923150Z  INFO burn_train::learner::epoch: Iteration 47
+2025-10-02T16:54:34.943483Z  INFO burn_train::learner::epoch: Iteration 48
+2025-10-02T16:54:34.964072Z  INFO burn_train::learner::epoch: Iteration 49
+2025-10-02T16:54:34.985094Z  INFO burn_train::learner::epoch: Iteration 50
+2025-10-02T16:54:35.005898Z  INFO burn_train::learner::epoch: Iteration 51
+2025-10-02T16:54:35.026319Z  INFO burn_train::learner::epoch: Iteration 52
+2025-10-02T16:54:35.049529Z  INFO burn_train::learner::epoch: Executing validation step for epoch 10
+2025-10-02T16:54:35.155405Z  INFO burn_train::checkpoint::file: Saving checkpoint 10 to articats\checkpoint\model-10
+2025-10-02T16:54:35.155432Z  INFO burn_train::checkpoint::file: Saving checkpoint 10 to articats\checkpoint\optim-10
+2025-10-02T16:54:35.155435Z  INFO burn_train::checkpoint::file: Saving checkpoint 10 to articats\checkpoint\scheduler-10
+2025-10-02T16:54:35.249904Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\model-8.mpk
+2025-10-02T16:54:35.352527Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\optim-8.mpk
+2025-10-02T16:54:35.352560Z  INFO burn_train::checkpoint::file: Removing checkpoint articats\checkpoint\scheduler-8.mpk

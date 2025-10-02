@@ -1638,6 +1638,7 @@ dependencies = [
  "anyhow",
  "burn",
  "burn-ndarray",
+ "burn-wgpu",
  "csv",
  "jieba-rs",
  "openblas-src",
