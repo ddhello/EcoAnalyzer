@@ -76,10 +76,10 @@ pub fn run_training(device: <MyBackend as Backend>::Device) -> Result<()> {
     println!("Dataloader Created.");
 
     //开始模型训练
-    const D_MODEL: usize = 128;
+    const D_MODEL: usize = 256;
     const N_HEADS: usize = 4;
-    const NUM_LAYERS: usize = 4;
-    const DROPOUT: f64 = 0.1;
+    const NUM_LAYERS: usize = 6;
+    const DROPOUT: f64 = 0.25;
 
     let model = TextRegressionModel::<MyAutodiffBackend>::new(
         vocab.len(),
@@ -99,7 +99,7 @@ pub fn run_training(device: <MyBackend as Backend>::Device) -> Result<()> {
         .metric_train(LossMetric::new())
         .metric_valid(LossMetric::new())
         .with_file_checkpointer(CompactRecorder::new())
-        .num_epochs(10)
+        .num_epochs(30)
         .build(model, optim, 1e-4);
 
     println!("Starting Training....");

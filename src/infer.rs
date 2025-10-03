@@ -20,10 +20,10 @@ pub fn infer(device: <MyBackend as Backend>::Device,text_to_infer: &str) -> Resu
     let vocab = Vocab::build(&tokenizer_data, 1);
     let vocab_size = vocab.len();
 
-    const D_MODEL: usize = 128;
+    const D_MODEL: usize = 256;
     const N_HEADS: usize = 4;
-    const NUM_LAYERS: usize = 4;
-    const DROPOUT: f64 = 0.1;
+    const NUM_LAYERS: usize = 6;
+    const DROPOUT: f64 = 0.25;
     const MAX_SEQ_LEN: usize = 128;
 
     println!("Loading Trained Model....");
